@@ -9,7 +9,8 @@ export default class App extends Component {
       hue: 0,
       saturation: 50,
       lightness: 50,
-      color: 'pink'
+      color: 'pink',
+      remColors: []
     }
   }
 
@@ -22,6 +23,15 @@ export default class App extends Component {
   }
   changeLightness = e => {
     this.setState({ lightness: e.target.value })
+  }
+
+  rememberColor = () => {
+    let color = this.state.remColors.concat(
+      `hsl(${this.state.hue},${this.state.saturation}%, ${
+        this.state.lightness
+      }%)`
+    )
+    this.setState({ remColors: color })
   }
   render() {
     return (
@@ -52,6 +62,8 @@ export default class App extends Component {
           saturation={this.state.saturation}
           lightness={this.state.lightness}
         />
+        <p>{this.state.remColors}</p>
+        <button onClick={this.rememberColor}>remember color</button>
       </>
     )
   }
